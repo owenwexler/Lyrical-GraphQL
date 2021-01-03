@@ -3,14 +3,12 @@ import React from 'react';
 const ErrorCard = ({ message }) => {
   return (
     <div className="row">
-      <div className="col s9 m3">
-        <div className="card red darken-1">
-          <div className="card-content white-text">
-            <p>{message}</p>
-          </div>
-        </div>
+    <div className="col s12 m5">
+      <div className="card-panel red">
+        <span className="white-text">{message}</span>
       </div>
     </div>
+  </div>
   )
 }
 

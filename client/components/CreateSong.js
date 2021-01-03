@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Link, Router } from 'react-router';
 
 import ErrorCard from './ErrorCard';
+import Loader from './Loader';
 
 class CreateSong extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class CreateSong extends Component {
     this.state = {
       title: '',
       validationError: false,
+      loading: false,
     }
   }
 
@@ -21,19 +24,21 @@ class CreateSong extends Component {
       this.setState({ validationError: true });
       setInterval(() => {
         this.setState({ validationError: false });
-      }, 2500);
+      }, 2950);
+      return;
     } else {
       this.props.mutate({
         variables: {
           title: this.state.title
         }
-      })
+      }).then(() => {});
     }
   }
 
   render() {
     return (
       <div>
+        <Link to="/"><h5>&lt; Back</h5></Link>
         <h3>Create a New Song:</h3>
         <form onSubmit={this.onSubmit.bind(this)}>
           <label>Song Title:</label>
@@ -42,6 +47,7 @@ class CreateSong extends Component {
             value={this.state.title}
           />
         </form>
+        <Loader />
         {this.state.validationError ? <ErrorCard message="Please enter a song title." /> : null}
       </div>
     );
