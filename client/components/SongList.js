@@ -3,18 +3,11 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 
 import Loader from './Loader';
 
-const query = gql`
-  {
-    songs {
-      id
-      title
-    }
-  }
-`;
+import gql from 'graphql-tag';
+import query from '../queries/fetchSongs';
 
 const SongList = ({ data }) => {
   let pageData;
@@ -27,7 +20,7 @@ const SongList = ({ data }) => {
         <ul className="collection">
           {
             data.songs.map(song => {
-              return <li key={song.id} className="collection-item"><h3>{song.title}</h3></li>
+              return <li key={song.id} className="collection-item"><h5>{song.title}</h5></li>
             })
           }
         </ul>
