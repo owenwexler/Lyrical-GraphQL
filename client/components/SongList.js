@@ -1,20 +1,41 @@
 import React from 'react';
 
-const SongList = ({ songs }) => {
-  return (
-    <div>
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-      <h1>SongList</h1>
-      {/* <td>
+import { songTitles } from '../queries/queries';
+
+const query = gql`
+  {
+    songs {
+      id
+      title
+    }
+  }
+`;
+
+const SongList = ({ data }) => {
+  let pageData;
+
+  if (!data.songs) {
+    pageData = <div><h1>Loading...</h1></div>
+  } else {
+    pageData = (
+      <ul className="collection">
         {
-          songs.map(song => {
-            return <tr><h1>{song.title}</h1></tr>
+          data.songs.map(song => {
+            return <li key={song.id} className="collection-item"><h1>{song.title}</h1></li>
           })
         }
-      </td> */}
+      </ul>
+    )
+  }
 
+  return (
+    <div>
+      {pageData}
     </div>
   )
 }
 
-export default SongList;
+export default graphql(query)(SongList);
