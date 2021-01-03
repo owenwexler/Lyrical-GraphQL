@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import Loader from './Loader';
+
 const query = gql`
   {
     songs {
@@ -18,14 +20,14 @@ const SongList = ({ data }) => {
   let pageData;
 
   if (!data.songs) {
-    pageData = <div><h1>Loading...</h1></div>
+    pageData = <div><Loader /></div>
   } else {
     pageData = (
       <div>
         <ul className="collection">
           {
             data.songs.map(song => {
-              return <li key={song.id} className="collection-item"><h1>{song.title}</h1></li>
+              return <li key={song.id} className="collection-item"><h3>{song.title}</h3></li>
             })
           }
         </ul>

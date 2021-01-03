@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link, Router } from 'react-router';
+import { Link, Router, hashHistory } from 'react-router';
 
 import ErrorCard from './ErrorCard';
 import Loader from './Loader';
@@ -27,11 +27,14 @@ class CreateSong extends Component {
       }, 2950);
       return;
     } else {
+      this.setState({ loading: true });
       this.props.mutate({
         variables: {
           title: this.state.title
         }
-      }).then(() => {});
+      }).then(() => {
+        hashHistory.push('/');
+      });
     }
   }
 
@@ -47,7 +50,7 @@ class CreateSong extends Component {
             value={this.state.title}
           />
         </form>
-        <Loader />
+        {this.state.loading ? <Loader /> : null}
         {this.state.validationError ? <ErrorCard message="Please enter a song title." /> : null}
       </div>
     );
