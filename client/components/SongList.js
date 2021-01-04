@@ -9,7 +9,13 @@ import Loader from './Loader';
 import gql from 'graphql-tag';
 import query from '../queries/fetchSongs';
 
-const SongList = ({ data }) => {
+const SongList = ({ data, mutate }) => {
+
+  const onSongDelete = (id) => {
+    mutate({ variables: { id } })
+      .then(() => data.refetch());
+  }
+
   let pageData;
 
   if (!data.songs) {
@@ -19,8 +25,13 @@ const SongList = ({ data }) => {
       <div>
         <ul className="collection">
           {
-            data.songs.map(song => {
-              return <li key={song.id} className="collection-item"><h5>{song.title}</h5></li>
+            data.songs.map(({ id, title }) => {
+              return (
+                <div className="collection-item">
+                  <li key={id}><h5>{title}</h5></li>
+                  <i className="material-icons" onClick={() => onSongDelete(id)}>delete</i>
+                </div>
+              );
             })
           }
         </ul>
@@ -38,4 +49,14 @@ const SongList = ({ data }) => {
   )
 }
 
-export default graphql(query)(SongList);
+const mutation = gql`
+  mutation DeleteSong($id: ID) {
+    deleteSong(id: $id) {
+      id
+    }
+  }
+`
+
+export default graphql(mutation)(
+  graphql(query)(SongList)
+);

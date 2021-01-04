@@ -1,0 +1,10 @@
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection-item i {
+  cursor: pointer;
+  margin-top: 8px;
+  font-size: 32px;
+}
