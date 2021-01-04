@@ -26,9 +26,12 @@ const SongList = ({ data, mutate }) => {
         <ul className="collection">
           {
             data.songs.map(({ id, title }) => {
+              let linkText = `songs/${id}`;
               return (
                 <div className="collection-item">
-                  <li key={id}><h5>{title}</h5></li>
+                  <Link to={linkText}>
+                    <li key={id}><h5>{title}</h5></li>
+                  </Link>
                   <i className="material-icons" onClick={() => onSongDelete(id)}>delete</i>
                 </div>
               );

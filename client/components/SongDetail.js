@@ -1,14 +1,13 @@
 import React from 'react';
 
 import { graphql } from 'react-apollo';
+import { Link } from 'react-router';
 
 import getSongByID from '../queries/getSongByID';
 
 import Loader from './Loader';
 
 const SongDetail = (props) => {
-
-  console.log('SongDetail props: ', props);
 
   let pageData;
 
@@ -21,9 +20,9 @@ const SongDetail = (props) => {
 
   return (
     <div className="container">
+      <Link to="/"><h5>&lt; Back</h5></Link>
       { pageData }
     </div>
-
   )
 }
 
