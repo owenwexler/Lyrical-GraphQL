@@ -25,7 +25,7 @@ const SongDetail = (props) => {
       <Link to="/"><h5>&lt; Back</h5></Link>
       { pageData }
       <br />
-      {props.data.song ? <CreateLyric songId={song.id}/> : <Loader />}
+      {props.data.song ? <CreateLyric songId={props.params.id}/> : <Loader />}
     </div>
   )
 }
