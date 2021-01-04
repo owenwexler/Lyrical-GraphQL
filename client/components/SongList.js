@@ -38,7 +38,7 @@ const SongList = ({ data, mutate }) => {
             })
           }
         </ul>
-        <Link to="/songs/new" className="btn-floating btn-large red right">
+        <Link to="/songs/new" className="btn-floating btn-large blue right">
           <i className="material-icons">add</i>
         </Link>
       </div>

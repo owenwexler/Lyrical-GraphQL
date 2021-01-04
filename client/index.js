@@ -13,7 +13,6 @@ import SongList from './components/SongList';
 import CreateSong from './components/CreateSong';
 import SongDetail from './components/SongDetail';
 
-
 const client = new ApolloClient({});
 
 const Root = () => {
